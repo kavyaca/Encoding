@@ -13,7 +13,6 @@ namespace CSV.Models
         public string StudentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-       // public string ImageData { get; set; }
         public Boolean MyRecord { get; set; }
 
         private string _DateOfBirth;
@@ -36,7 +35,14 @@ namespace CSV.Models
         public DateTime DateOfBirthDT { get; internal set; }
         public string ImageData { get; set; }
         public int Age { get {
-                return (DateTime.Today.Year - DateOfBirthDT.Year); } }
+
+                int a = DateTime.Today.Year - DateOfBirthDT.Year;
+                if( a> 100)
+                {
+                    a = 24;
+                }
+                return (a);
+            } }
 
         public string AbsoluteUrl { get; set; }
         public string Directory { get; set; }

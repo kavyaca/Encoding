@@ -25,17 +25,19 @@ namespace CSV
             directories = FTP.GetDirectory(Constants.FTP.BaseUrl);
             //List<string> directories = FTP.GetDirectory(Constants.FTP.BaseUrl);
             List<Student> students = new List<Student>();
-            //int processed = 0;
+           //int processed = 0;
 
             foreach (var directory in directories)
             {
-
-                //if (++processed == 5) break;
-                //if (processed > 1)
-                //{
-
-                //QUESTION 1
                 Console.WriteLine("Directory: " + directory);
+            }
+
+                foreach (var directory in directories)
+            {
+
+                
+               
+              
 
                 Student student = new Student() { AbsoluteUrl = Constants.FTP.BaseUrl };
                 student.FromDirectory(directory);
@@ -48,10 +50,10 @@ namespace CSV
                 if (fileExists == true)
                 {
                     //QUESTION 2
-                    Console.WriteLine("Found info file:");
+                    Console.WriteLine("Found info file: " + infoFilePath);
                     string firstname = student.FirstName;
                     //Console.WriteLine("Student name:" + firstname);
-                    if (student.StudentId == "200429439")
+                    if (student.StudentId == Constants.Student.StudentId)
                     {
 
                         //student.FirstName
@@ -71,16 +73,18 @@ namespace CSV
                     string csv = Encoding.Default.GetString(infoBytes);
 
 
+
                     string[] csv_content = csv.Split("\r\n", StringSplitOptions.RemoveEmptyEntries);
                     if (csv_content.Length != 2)
                     {
                         Console.WriteLine("Error in CSV format.");
+                       
                     }
                     else
                     {
 
                         student.FromCSV(csv_content[1]);
-                        // Console.WriteLine("Data test CSV:::" + csv_content[1]);
+                        //Console.WriteLine("Extracting data from "+student.FirstName+ " directory: \n" + csv_content[1]);
 
 
 
@@ -112,7 +116,7 @@ namespace CSV
                     }
                 }
 
-                Console.WriteLine("Info File Path::: " + infoFilePath);
+                //Console.WriteLine("Info File Path::: " + infoFilePath);
 
                 string imageFilePath = student.FullPathUrl + "/" + Constants.Locations.ImageFile;
 
@@ -121,7 +125,7 @@ namespace CSV
                 if (imageFileExists == true)
                 {
 
-                    Console.WriteLine("Found image file:");
+                    Console.WriteLine("Found image file: " +imageFilePath);
 
                     if ((student.ImageData) == null || student.ImageData.Length<2)
                     {
@@ -164,7 +168,7 @@ namespace CSV
 
                 }
 
-                Console.WriteLine("Image File Path::: " + imageFilePath);
+                //Console.WriteLine("Image File Path::: " + imageFilePath);
 
                 //Console.WriteLine("HI>>>>" + student);
                 students.Add(student);
@@ -185,7 +189,7 @@ namespace CSV
                 {
                     fs.WriteLine(student.ToCSV());
                     Console.WriteLine("To CSV :: " + student.ToCSV());
-                    Console.WriteLine("To String :: " + student.ToString());
+                   Console.WriteLine("To String :: " + student.ToString());
 
 
                 }
@@ -223,9 +227,9 @@ namespace CSV
 
 
 
-            FTP.UploadFile(Constants.Locations.StudentCSVFile, Constants.FTP.CSVUploadLocation);
-            FTP.UploadFile(Constants.Locations.StudentXMLFile, Constants.FTP.XMLUploadLocation);
-            FTP.UploadFile(Constants.Locations.StudentJSONFile, Constants.FTP.JSONUploadLocation);
+            //FTP.UploadFile(Constants.Locations.StudentCSVFile, Constants.FTP.CSVUploadLocation);
+            //FTP.UploadFile(Constants.Locations.StudentXMLFile, Constants.FTP.XMLUploadLocation);
+            //FTP.UploadFile(Constants.Locations.StudentJSONFile, Constants.FTP.JSONUploadLocation);
 
 
             return;
@@ -351,12 +355,12 @@ namespace CSV
 
             foreach(var student in start_list)
         {
-                Console.Write("Students Start with C::  "+ student + "  \n");
+                Console.Write("Students Start with C list::  "+ student.Directory + "  \n");
             }
             
             foreach (var student in contains_list)
             {
-                Console.Write("Students Contains C:: " + student + "  \n");
+                Console.Write("Students Contains C list :: " + student.Directory + "  \n");
             }
 
             double average = age_list.Count > 0 ? age_list.Average() : 0;

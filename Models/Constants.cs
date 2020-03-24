@@ -5,7 +5,7 @@ namespace CSV.Models
     public class Constants
     {
 
-        public readonly Student Student = new Student { StudentId = "200429439", FirstName = "Kavya", LastName = "Arora" };
+        public static readonly Student Student = new Student { StudentId = "200429439", FirstName = "Kavya", LastName = "Arora" };
 
         public class Locations
         {
@@ -21,13 +21,13 @@ namespace CSV.Models
             public const string InfoFile = "info.csv";
             public const string ImageFile = "myimage.jpg";
 
-            //public readonly static string StudentCSVFile = "/Users/kavyaarora/Downloads/CSV-3/Content/Data/students.csv";
-            //public readonly static string StudentJSONFile = "/Users/kavyaarora/Downloads/CSV-3/Content/Data/students.json";
-            //public readonly static string StudentXMLFile = "/Users/kavyaarora/Downloads/CSV-3/Content/Data/students.xml";
+            public readonly static string StudentCSVFile = "/Users/kavyaarora/Downloads/CSV-2 3/Content/Data/students.csv";
+            public readonly static string StudentJSONFile = "/Users/kavyaarora/Downloads/CSV-2 3/Content/Data/students.json";
+            public readonly static string StudentXMLFile = "/Users/kavyaarora/Downloads/CSV-2 3/Content/Data/students.xml";
 
-            public readonly static string StudentCSVFile = $"{DataFolder}\\students.csv";
-            public readonly static string StudentJSONFile = $"{DataFolder}\\students.json";
-            public readonly static string StudentXMLFile = $"{DataFolder}\\students.xml";
+            //public readonly static string StudentCSVFile = $"{DataFolder}\\students.csv";
+            //public readonly static string StudentJSONFile = $"{DataFolder}\\students.json";
+            //public readonly static string StudentXMLFile = $"{DataFolder}\\students.xml";
 
 
         }
