@@ -1,5 +1,7 @@
 # Encoding
 
+For Testing and screenshots I am talking first few 10-15 directories
+
 List of Directories
 
 <img width="624" alt="directorylist" src="https://user-images.githubusercontent.com/56988970/77464003-e62a8380-6ddc-11ea-8cb8-ef1925d9f3f7.png">
