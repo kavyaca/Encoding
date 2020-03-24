@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace CSV.Models
 {
     public class Student
     {
+
+        public static string HeaderRow = "{nameof(Student.StudentId)},{nameof(Student.FirstName)},{nameof(Student.LastName)},{nameof(Student.Age},{nameof(Student.DateOfBirth)},nameof(Student.ImageData)}";
+
         public string StudentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+       // public string ImageData { get; set; }
+        public Boolean MyRecord { get; set; }
 
         private string _DateOfBirth;
         public string DateOfBirth
@@ -25,8 +31,12 @@ namespace CSV.Models
             }
         }
 
+     
+
         public DateTime DateOfBirthDT { get; internal set; }
         public string ImageData { get; set; }
+        public int Age { get {
+                return (DateTime.Today.Year - DateOfBirthDT.Year); } }
 
         public string AbsoluteUrl { get; set; }
         public string Directory { get; set; }
@@ -38,15 +48,25 @@ namespace CSV.Models
             }
         }
 
+        public List<string> Exceptions { get; set; } = new List<string>();
         public void FromCSV(string csvdata)
         {
             string[] data = csvdata.Split(",", StringSplitOptions.None);
 
-            StudentId = data[0];
-            FirstName = data[1];
-            LastName = data[2];
-            DateOfBirth = data[3];
-            ImageData = data[4];
+            try
+            {
+                StudentId = data[0];
+                FirstName = data[1];
+                LastName = data[2];
+                DateOfBirth = data[3];
+                ImageData = data[4];
+                
+            }
+            catch (Exception e)
+            {
+                Exceptions.Add(e.Message);
+            }
+
         }
 
         public void FromDirectory(string directory)
@@ -63,18 +83,23 @@ namespace CSV.Models
             StudentId = data[0];
             FirstName = data[1];
             LastName = data[2];
+           
         }
 
         public string ToCSV()
         {
-            string result = $"{StudentId},{FirstName},{LastName},{DateOfBirthDT.ToShortDateString()},{ImageData}";
+            string result = $"{StudentId},{FirstName},{LastName},{Age},{DateOfBirthDT.ToShortDateString()},{MyRecord},{ImageData}";
             return result;
         }
 
         public override string ToString()
         {
-            string result = $"{StudentId} {FirstName} {LastName}";
+            string result = $"{StudentId},{FirstName},{LastName},{Age},{DateOfBirthDT.ToShortDateString()},{MyRecord},{ImageData}";
             return result;
         }
+
+       
     }
+
+    
 }

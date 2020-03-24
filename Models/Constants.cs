@@ -5,7 +5,7 @@ namespace CSV.Models
     public class Constants
     {
 
-        public  Student Student = new Student { StudentId = "200429439", FirstName = "Kavya", LastName = "Arora" };
+        public readonly Student Student = new Student { StudentId = "200429439", FirstName = "Kavya", LastName = "Arora" };
 
         public class Locations
         {
@@ -16,21 +16,35 @@ namespace CSV.Models
             public readonly static string ContentFolder = $"{ExePath}\\..\\..\\..\\Content";
             public readonly static string DataFolder = $"{ContentFolder}\\Data";
             public readonly static string ImagesFolder = $"{ContentFolder}\\Images";
+            public readonly static string FilesFolder = $"{ContentFolder}\\Files";
 
             public const string InfoFile = "info.csv";
             public const string ImageFile = "myimage.jpg";
+
+            //public readonly static string StudentCSVFile = "/Users/kavyaarora/Downloads/CSV-3/Content/Data/students.csv";
+            //public readonly static string StudentJSONFile = "/Users/kavyaarora/Downloads/CSV-3/Content/Data/students.json";
+            //public readonly static string StudentXMLFile = "/Users/kavyaarora/Downloads/CSV-3/Content/Data/students.xml";
+
+            public readonly static string StudentCSVFile = $"{DataFolder}\\students.csv";
+            public readonly static string StudentJSONFile = $"{DataFolder}\\students.json";
+            public readonly static string StudentXMLFile = $"{DataFolder}\\students.xml";
+
+
         }
 
         public class FTP
         {
             public const string Username = @"bdat100119f\bdat1001";
             public const string Password = "bdat1001";
-            public const string mydirectory = "200429439 Kavya Arora/info.csv";
 
-
-            public const string BaseUrl = "ftp://bdat100119f%255Cbdat1001@waws-prod-dm1-127.ftp.azurewebsites.windows.net/BDAT1001-20914/";
+            public const string BaseUrl = "ftp://waws-prod-dm1-127.ftp.azurewebsites.windows.net/bdat1001-20914";
+            public const string MyDirectory = "/200429439 Kavya Arora";
+            public const string CSVUploadLocation = BaseUrl + MyDirectory + "/students.csv";
+            public const string JSONUploadLocation = BaseUrl + MyDirectory + "/students.json";
+            public const string XMLUploadLocation = BaseUrl + MyDirectory + "/students.xml";
 
             public const int OperationPauseTime = 10000;
+
         }
     }
 }
