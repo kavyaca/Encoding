@@ -14,7 +14,7 @@ To CSV and To String
 
 <img width="657" alt="ToCSV" src="https://user-images.githubusercontent.com/56988970/77464257-48838400-6ddd-11ea-9358-e5e194ff6f8f.png">
 
-StartsWith and display the count of items
+StartsWith and display the count of items(Based On FirstName & LastName)
 
 <img width="636" alt="Screen Shot 2020-03-24 at 9 24 14 PM" src="https://user-images.githubusercontent.com/56988970/77492453-fd866280-6e16-11ea-93af-266f92a67789.png">
 
