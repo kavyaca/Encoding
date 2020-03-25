@@ -16,7 +16,9 @@ To CSV and To String
 
 StartsWith and display the count of items
 
-<img width="608" alt="startwith" src="https://user-images.githubusercontent.com/56988970/77464285-520cec00-6ddd-11ea-8e75-7227085d5359.png">
+<img width="636" alt="Screen Shot 2020-03-24 at 9 24 14 PM" src="https://user-images.githubusercontent.com/56988970/77492453-fd866280-6e16-11ea-93af-266f92a67789.png">
+
+<img width="618" alt="ag" src="https://user-images.githubusercontent.com/56988970/77492459-00815300-6e17-11ea-938a-7cc6f373e08e.png">
 
 
 Query for finding your record
