@@ -227,9 +227,9 @@ namespace CSV
 
 
 
-            //FTP.UploadFile(Constants.Locations.StudentCSVFile, Constants.FTP.CSVUploadLocation);
-            //FTP.UploadFile(Constants.Locations.StudentXMLFile, Constants.FTP.XMLUploadLocation);
-            //FTP.UploadFile(Constants.Locations.StudentJSONFile, Constants.FTP.JSONUploadLocation);
+            FTP.UploadFile(Constants.Locations.StudentCSVFile, Constants.FTP.CSVUploadLocation);
+            FTP.UploadFile(Constants.Locations.StudentXMLFile, Constants.FTP.XMLUploadLocation);
+            FTP.UploadFile(Constants.Locations.StudentJSONFile, Constants.FTP.JSONUploadLocation);
 
 
             return;
