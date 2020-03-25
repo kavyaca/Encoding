@@ -23,7 +23,7 @@ StartsWith and display the count of items
 
 Query for finding your record
 
-<img width="661" alt="record" src="https://user-images.githubusercontent.com/56988970/77464067-fe9a9e00-6ddc-11ea-93d9-b920eb3105ee.png">
+<img width="640" alt="Screen Shot 2020-03-24 at 9 34 45 PM" src="https://user-images.githubusercontent.com/56988970/77492599-548c3780-6e17-11ea-8d61-557749bd3189.png">
 
 For Calculating Age based on DOB
 
