@@ -7,7 +7,7 @@ namespace CSV.Models
 {
     public class Student
     {
-
+        public static int a = 0;
         public static string HeaderRow = "{nameof(Student.StudentId)},{nameof(Student.FirstName)},{nameof(Student.LastName)},{nameof(Student.Age},{nameof(Student.DateOfBirth)},nameof(Student.ImageData)}";
 
         public string StudentId { get; set; }
@@ -36,7 +36,7 @@ namespace CSV.Models
         public string ImageData { get; set; }
         public int Age { get {
 
-                int a = DateTime.Today.Year - DateOfBirthDT.Year;
+                a = DateTime.Today.Year - DateOfBirthDT.Year;
                 if( a> 100)
                 {
                     a = 24;

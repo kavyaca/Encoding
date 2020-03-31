@@ -1,5 +1,9 @@
 ﻿using CSV.Models;
 using CSV.Models.Utilities;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,9 +14,20 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml;
 using System.Xml.Linq;
+
+using A = DocumentFormat.OpenXml.Drawing;
+
+using Drawing = DocumentFormat.OpenXml.Wordprocessing.Drawing;
+using DW = DocumentFormat.OpenXml.Drawing.Wordprocessing;
+using PIC = DocumentFormat.OpenXml.Drawing.Pictures;
+using Run = DocumentFormat.OpenXml.Wordprocessing.Run;
+using Text = DocumentFormat.OpenXml.Wordprocessing.Text;
+
+
 
 namespace CSV
 {
@@ -21,24 +36,23 @@ namespace CSV
         static void Main(string[] args)
         {
 
+
+
             List<string> directories = new List<string>();
             directories = FTP.GetDirectory(Constants.FTP.BaseUrl);
             //List<string> directories = FTP.GetDirectory(Constants.FTP.BaseUrl);
             List<Student> students = new List<Student>();
-           //int processed = 0;
+            int processed = 0;
+
+
 
             foreach (var directory in directories)
             {
+                ++processed;
+                if (processed == 10) break;
+
+
                 Console.WriteLine("Directory: " + directory);
-            }
-
-                foreach (var directory in directories)
-            {
-
-                
-               
-              
-
                 Student student = new Student() { AbsoluteUrl = Constants.FTP.BaseUrl };
                 student.FromDirectory(directory);
 
@@ -55,7 +69,6 @@ namespace CSV
                     //Console.WriteLine("Student name:" + firstname);
                     if (student.StudentId == Constants.Student.StudentId)
                     {
-
                         //student.FirstName
                         student.MyRecord = true;
 
@@ -78,7 +91,7 @@ namespace CSV
                     if (csv_content.Length != 2)
                     {
                         Console.WriteLine("Error in CSV format.");
-                       
+
                     }
                     else
                     {
@@ -125,20 +138,22 @@ namespace CSV
                 if (imageFileExists == true)
                 {
 
-                    Console.WriteLine("Found image file: " +imageFilePath);
+                    Console.WriteLine("Found image file: " + imageFilePath);
 
-                    if ((student.ImageData) == null || student.ImageData.Length<2)
+                    if ((student.ImageData) == null || student.ImageData.Length < 2)
                     {
                         Console.WriteLine("No Imagedata:");
 
-                        
+
 
                         try
                         {
                             var ImageBytes = FTP.DownloadFileBytes(imageFilePath);
                             string base64String = Convert.ToBase64String(ImageBytes);
                             student.ImageData = base64String;
-                            
+
+
+
                         }
                         catch (Exception ex)
                         {
@@ -168,19 +183,25 @@ namespace CSV
 
                 }
 
-                //Console.WriteLine("Image File Path::: " + imageFilePath);
 
-                //Console.WriteLine("HI>>>>" + student);
                 students.Add(student);
 
-            //}
+                //}
 
             }
             //Console.WriteLine("Directory count: " + directories.Count);
 
-            
+            Console.WriteLine(Constants.Locations.StudentDocFile);
+            Console.WriteLine(Constants.Locations.StudentExcelFile);
 
-          
+            SpreadSheetClass.CreateSpreadsheetWorkbook(Constants.Locations.StudentExcelFile, students);
+            WordDocumentClass.CreateWordprocessingDocument(Constants.Locations.StudentDocFile, students);
+
+           
+
+
+
+            
             using (StreamWriter fs = new StreamWriter(Constants.Locations.StudentCSVFile))
             {
                 //int Age = 10;
@@ -195,21 +216,21 @@ namespace CSV
                 }
             }
 
-           
-   
 
-            
+
+
+
             String jsonconvert = ConvertCsvFileToJsonObject(Constants.Locations.StudentCSVFile);
 
             File.WriteAllText(Constants.Locations.StudentJSONFile, jsonconvert);
 
-         
 
 
-            
+
+
             //TEST CSV TO XML
             //START
-           
+
 
 
             var lines = File.ReadAllLines(Constants.Locations.StudentCSVFile);
@@ -231,12 +252,16 @@ namespace CSV
             FTP.UploadFile(Constants.Locations.StudentXMLFile, Constants.FTP.XMLUploadLocation);
             FTP.UploadFile(Constants.Locations.StudentJSONFile, Constants.FTP.JSONUploadLocation);
 
-
+            
             return;
 
         }
 
-        
+       
+
+
+   
+
 
 
         /// <summary>

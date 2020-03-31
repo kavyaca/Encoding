@@ -13,10 +13,16 @@ namespace CSV.Models
 
             public readonly static string ExePath = Environment.CurrentDirectory;
 
-            public readonly static string ContentFolder = $"{ExePath}\\..\\..\\..\\Content";
-            public readonly static string DataFolder = $"{ContentFolder}\\Data";
-            public readonly static string ImagesFolder = $"{ContentFolder}\\Images";
-            public readonly static string FilesFolder = $"{ContentFolder}\\Files";
+            //public readonly static string ContentFolder = $"{ExePath}\\..\\..\\..\\Content";
+            //public readonly static string DataFolder = $"{ContentFolder}\\Data";
+            //public readonly static string ImagesFolder = $"{ContentFolder}\\Images";
+            //public readonly static string FilesFolder = $"{ContentFolder}\\Files";
+
+
+            public readonly static string ContentFolder = $"{ExePath}//..//..//..//Content";
+            public readonly static string DataFolder = $"{ContentFolder}//Data";
+            public readonly static string ImagesFolder = $"{ContentFolder}//Images";
+            public readonly static string FilesFolder = $"{ContentFolder}//Files";
 
             public const string InfoFile = "info.csv";
             public const string ImageFile = "myimage.jpg";
@@ -24,10 +30,18 @@ namespace CSV.Models
             //public readonly static string StudentCSVFile = "/Users/kavyaarora/Downloads/CSV-2 3/Content/Data/students.csv";
             //public readonly static string StudentJSONFile = "/Users/kavyaarora/Downloads/CSV-2 3/Content/Data/students.json";
             //public readonly static string StudentXMLFile = "/Users/kavyaarora/Downloads/CSV-2 3/Content/Data/students.xml";
+            //public readonly static string StudentDocFile = "/Users/kavyaarora/Downloads/CSV-2 3/Content/Data/students.docx";
 
-            public readonly static string StudentCSVFile = $"{DataFolder}\\students.csv";
-            public readonly static string StudentJSONFile = $"{DataFolder}\\students.json";
-            public readonly static string StudentXMLFile = $"{DataFolder}\\students.xml";
+            //public readonly static string StudentCSVFile = $"{DataFolder}\\students.csv";
+            //public readonly static string StudentJSONFile = $"{DataFolder}\\students.json";
+            //public readonly static string StudentXMLFile = $"{DataFolder}\\students.xml";
+
+            public readonly static string StudentCSVFile = $"{DataFolder}//students.csv";
+            public readonly static string StudentJSONFile = $"{DataFolder}//students.json";
+            public readonly static string StudentXMLFile = $"{DataFolder}//students.xml";
+            public readonly static string StudentDocFile = $"{DataFolder}//students.docx";
+            public readonly static string StudentExcelFile = $"{DataFolder}//students.xlsx";
+            public readonly static string StudentPPTFile = $"{DataFolder}//students.pptx";
 
 
         }
