@@ -28,3 +28,14 @@ Query for finding your record
 For Calculating Age based on DOB
 
 <img width="612" alt="age" src="https://user-images.githubusercontent.com/56988970/77464084-035f5200-6ddd-11ea-88fe-a43371e42b32.png">
+
+
+Created document from API data
+<img width="787" alt="Screen Shot 2020-03-31 at 6 53 05 PM" src="https://user-
+
+Created Excel from Student data(FTP)
+
+images.githubusercontent.com/56988970/78082654-8ce4c600-7381-11ea-80a0-c12679e28231.png">
+<img width="481" alt="Screen Shot 2020-03-31 at 6 54 42 PM" src="https://user-images.githubusercontent.com/56988970/78082658-8e15f300-7381-11ea-9871-c7f1403dc7a0.png">
+<img width="725" alt="Screen Shot 2020-03-31 at 6 55 23 PM" src="https://user-images.githubusercontent.com/56988970/78082660-8f472000-7381-11ea-9ffb-8e0ee1b21d64.png">
+
