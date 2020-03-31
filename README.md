@@ -30,8 +30,4 @@ For Calculating Age based on DOB
 <img width="612" alt="age" src="https://user-images.githubusercontent.com/56988970/77464084-035f5200-6ddd-11ea-88fe-a43371e42b32.png">
 
 
-Created document from API data
-<img width="787" alt="Screen Shot 2020-03-31 at 6 53 05 PM" src="https://user-
-
-
 
