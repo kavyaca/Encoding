@@ -72,7 +72,7 @@ namespace CSV.Models.Utilities
             {
                 FtpWebResponse response = (FtpWebResponse)ex.Response;
                 if (response.StatusCode ==
-                    FtpStatusCode.ActionNotTakenFileUnavailable)
+                 FtpStatusCode.ActionNotTakenFileUnavailable)
                 {
                     //Does not exist
                     return false;

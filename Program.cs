@@ -1,31 +1,18 @@
 ﻿using CSV.Models;
 using CSV.Models.Utilities;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;
-using DocumentFormat.OpenXml.Wordprocessing;
+
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
+
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.Json;
-using System.Text.RegularExpressions;
+
 using System.Threading;
-using System.Xml;
+
 using System.Xml.Linq;
-
-using A = DocumentFormat.OpenXml.Drawing;
-
-using Drawing = DocumentFormat.OpenXml.Wordprocessing.Drawing;
-using DW = DocumentFormat.OpenXml.Drawing.Wordprocessing;
-using PIC = DocumentFormat.OpenXml.Drawing.Pictures;
-using Run = DocumentFormat.OpenXml.Wordprocessing.Run;
-using Text = DocumentFormat.OpenXml.Wordprocessing.Text;
 
 
 
@@ -36,24 +23,30 @@ namespace CSV
         static void Main(string[] args)
         {
 
+            Models.ApiData.StudentController.CallApi();
+
+
 
 
             List<string> directories = new List<string>();
             directories = FTP.GetDirectory(Constants.FTP.BaseUrl);
-            //List<string> directories = FTP.GetDirectory(Constants.FTP.BaseUrl);
+
             List<Student> students = new List<Student>();
-            int processed = 0;
+            //int processed = 0;
 
 
 
             foreach (var directory in directories)
             {
-                ++processed;
-                if (processed == 10) break;
+                //++processed;
+                //if (processed == 3) break;
 
 
                 Console.WriteLine("Directory: " + directory);
-                Student student = new Student() { AbsoluteUrl = Constants.FTP.BaseUrl };
+                Student student = new Student()
+                {
+                    AbsoluteUrl = Constants.FTP.BaseUrl
+                };
                 student.FromDirectory(directory);
 
 
@@ -106,14 +99,14 @@ namespace CSV
                 }
                 else
                 {
-                    //QUESTION 2
+
                     Console.WriteLine("Could not find info file:");
                     try
                     {
-                        if (student.StudentId == "200429439")
+                        if (student.StudentId == Constants.Locations.MyID)
                         {
 
-                            //student.FirstName
+
                             student.MyRecord = true;
 
 
@@ -197,11 +190,11 @@ namespace CSV
             SpreadSheetClass.CreateSpreadsheetWorkbook(Constants.Locations.StudentExcelFile, students);
             WordDocumentClass.CreateWordprocessingDocument(Constants.Locations.StudentDocFile, students);
 
-           
+            PresentationClass.CreatePresentation(Constants.Locations.StudentPPTFile);
 
 
 
-            
+
             using (StreamWriter fs = new StreamWriter(Constants.Locations.StudentCSVFile))
             {
                 //int Age = 10;
@@ -210,7 +203,7 @@ namespace CSV
                 {
                     fs.WriteLine(student.ToCSV());
                     Console.WriteLine("To CSV :: " + student.ToCSV());
-                   Console.WriteLine("To String :: " + student.ToString());
+                    Console.WriteLine("To String :: " + student.ToString());
 
 
                 }
@@ -237,8 +230,8 @@ namespace CSV
             string[] headers = lines[0].Split(',').Select(x => x.Trim('\"')).ToArray();
 
             var xml = new XElement("root",
-               lines.Where((line, index) => index > 0).Select(line => new XElement("row",
-                  line.Split(',').Select((column, index) => new XElement(headers[index], column)))));
+             lines.Where((line, index) => index > 0).Select(line => new XElement("row",
+              line.Split(',').Select((column, index) => new XElement(headers[index], column)))));
 
             xml.Save(Constants.Locations.StudentXMLFile);
             //END
@@ -248,19 +241,19 @@ namespace CSV
 
 
 
-            FTP.UploadFile(Constants.Locations.StudentCSVFile, Constants.FTP.CSVUploadLocation);
-            FTP.UploadFile(Constants.Locations.StudentXMLFile, Constants.FTP.XMLUploadLocation);
-            FTP.UploadFile(Constants.Locations.StudentJSONFile, Constants.FTP.JSONUploadLocation);
+            //FTP.UploadFile(Constants.Locations.StudentCSVFile, Constants.FTP.CSVUploadLocation);
+            //FTP.UploadFile(Constants.Locations.StudentXMLFile, Constants.FTP.XMLUploadLocation);
+            //FTP.UploadFile(Constants.Locations.StudentJSONFile, Constants.FTP.JSONUploadLocation);
 
-            
+
             return;
 
         }
 
-       
 
 
-   
+
+
 
 
 
@@ -335,7 +328,7 @@ namespace CSV
         }
 
         public static void AggregateFunctions(List<Student> st)
-           
+
         {
 
             Console.WriteLine("Count of all items in the List:::" + st.Count);
@@ -350,9 +343,9 @@ namespace CSV
                 Boolean s = student.MyRecord;
                 int age = student.Age;
                 age_list.Add(age);
-                String enter_character= "C";
+                String enter_character = "C";
 
-                if(student.FirstName.StartsWith(enter_character) || student.LastName.StartsWith(enter_character))
+                if (student.FirstName.StartsWith(enter_character) || student.LastName.StartsWith(enter_character))
                 {
                     startwith_count++;
                     start_list.Add(student);
@@ -367,22 +360,22 @@ namespace CSV
 
                 if (s == true)
                 {
-                    Console.WriteLine("My Record::"+student);
-                  
-                  
+                    Console.WriteLine("My Record::" + student);
+
+
                 }
-                
-              }
+
+            }
             Console.WriteLine("Starts With C students count:" + start_list.Count);
-            
+
             Console.WriteLine("Contains C students count:" + contains_list.Count);
 
 
-            foreach(var student in start_list)
-        {
-                Console.Write("Students Start with C list::  "+ student.Directory + "  \n");
+            foreach (var student in start_list)
+            {
+                Console.Write("Students Start with C list::  " + student.Directory + "  \n");
             }
-            
+
             foreach (var student in contains_list)
             {
                 Console.Write("Students Contains C list :: " + student.Directory + "  \n");
@@ -392,7 +385,7 @@ namespace CSV
             int min = age_list.Count > 0 ? age_list.Min() : 0;
             int max = age_list.Count > 0 ? age_list.Max() : 0;
 
-           
+
 
             Console.WriteLine("Average Age:" + (int)Math.Round(average));
 
@@ -412,11 +405,13 @@ namespace CSV
 
             var properties = lines[0].Split(',');
 
-            var listObjResult = new List<Dictionary<string, string>>();
+            var listObjResult = new List<Dictionary<string,
+             string>>();
 
             for (int i = 1; i < lines.Length; i++)
             {
-                var objResult = new Dictionary<string, string>();
+                var objResult = new Dictionary<string,
+                 string>();
                 for (int j = 0; j < properties.Length; j++)
                     objResult.Add(properties[j], csv[i][j]);
 
@@ -427,6 +422,6 @@ namespace CSV
         }
 
 
-        }
-       
+    }
+
 }

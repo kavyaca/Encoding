@@ -10,13 +10,16 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="DocX" Version="1.6.0" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.10.1" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Content\Data\" />
+    <Folder Include="Models\ApiData\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Content\Data\info.csv" />
     <None Remove="Content\Data\students.xlsx" />
+    <None Remove="Content\Data\students.docx" />
   </ItemGroup>
 </Project>

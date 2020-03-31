@@ -1,48 +1,31 @@
-﻿using CSV.Models;
-using CSV.Models.Utilities;
-using DocumentFormat.OpenXml;
+﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Text.Json;
-using System.Text.RegularExpressions;
-using System.Threading;
 using System.Xml;
 using System.Xml.Linq;
-using Xceed.Words.NET;
 using A = DocumentFormat.OpenXml.Drawing;
-using Columns = DocumentFormat.OpenXml.Spreadsheet.Columns;
 using Drawing = DocumentFormat.OpenXml.Wordprocessing.Drawing;
 using DW = DocumentFormat.OpenXml.Drawing.Wordprocessing;
 using PIC = DocumentFormat.OpenXml.Drawing.Pictures;
 using Run = DocumentFormat.OpenXml.Wordprocessing.Run;
 using Text = DocumentFormat.OpenXml.Wordprocessing.Text;
-using P = DocumentFormat.OpenXml.Presentation;
-using D = DocumentFormat.OpenXml.Drawing;
-
-
-
+using CSV.Models.ApiData;
 
 namespace CSV.Models.Utilities
 {
     public class WordDocumentClass
     {
 
-        public static void CreateWordprocessingDocument(string filepath, List<Student> st)
+
+        public static void CreateWordprocessingDocumentFromApi(string filepath, List<StudentNewModel> st)
         {
 
 
-          
-            String fileName  = "Users/kavyaarora/Downloads/CSV-2 3/Content/Images/MyImage.jpg";
+
+            String fileName = "Users/kavyaarora/Downloads/CSV-2 3/Content/Images/MyImage.jpg";
             using (WordprocessingDocument wordDocument =
            WordprocessingDocument.Create(filepath, WordprocessingDocumentType.Document))
             {
@@ -53,12 +36,88 @@ namespace CSV.Models.Utilities
                 mainPart.Document = new Document();
 
                 Body body = mainPart.Document.AppendChild(new Body());
-                // Paragraph mainpara = body.AppendChild(new Paragraph());
+
 
 
                 foreach (var stu in st)
                 {
-               Paragraph para = body.AppendChild(new Paragraph());
+
+
+
+                    Paragraph para = body.AppendChild(new Paragraph());
+
+
+                    Run run = para.AppendChild(new Run());
+                    run.AppendChild(new Text("Id: " + stu.Id));
+
+                    Paragraph para0 = body.AppendChild(new Paragraph());
+
+
+                    Run run0 = para0.AppendChild(new Run());
+                    run0.AppendChild(new Text("Username: " + stu.Username));
+
+
+                    Paragraph para1 = body.AppendChild(new Paragraph());
+
+                    Run run1 = para1.AppendChild(new Run());
+                    run1.AppendChild(new Text("Name: " + stu.Name));
+
+                    Paragraph para2 = body.AppendChild(new Paragraph());
+
+                    Run run2 = para2.AppendChild(new Run());
+                    run2.AppendChild(new Text("Phone: " + stu.Phone));
+
+                    Paragraph para3 = body.AppendChild(new Paragraph());
+
+                    Run run3 = para3.AppendChild(new Run());
+                    run3.AppendChild(new Text("Email: " + stu.Email));
+
+                    Paragraph para4 = body.AppendChild(new Paragraph());
+
+                    Run run4 = para4.AppendChild(new Run());
+                    run4.AppendChild(new Text("Website: " + stu.Website));
+
+
+                    Paragraph PageBreakParagraph = new Paragraph(new DocumentFormat.OpenXml.Wordprocessing.Run(new DocumentFormat.OpenXml.Wordprocessing.Break() { Type = BreakValues.Page }));
+
+
+
+
+                    body.Append(PageBreakParagraph);
+
+                }
+
+                // var styles = ExtractStylesPart(filepath, true);
+
+
+
+            }
+
+
+
+        }
+        public static void CreateWordprocessingDocument(string filepath, List<Student> st)
+        {
+
+
+
+            String fileName = Constants.Locations.ImagesFolder + "/" + Constants.Locations.ImageFile;
+            using (WordprocessingDocument wordDocument =
+           WordprocessingDocument.Create(filepath, WordprocessingDocumentType.Document))
+            {
+                // Add a main document part. 
+                MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
+
+                // Create the document structure and add some text.
+                mainPart.Document = new Document();
+
+                Body body = mainPart.Document.AppendChild(new Body());
+
+
+
+                foreach (var stu in st)
+                {
+                    Paragraph para = body.AppendChild(new Paragraph());
 
 
                     Run run = para.AppendChild(new Run());
@@ -92,7 +151,7 @@ namespace CSV.Models.Utilities
 
                 }
 
-               // var styles = ExtractStylesPart(filepath, true);
+                // var styles = ExtractStylesPart(filepath, true);
 
 
 

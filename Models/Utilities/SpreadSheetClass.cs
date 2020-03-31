@@ -20,7 +20,7 @@ namespace CSV.Models.Utilities
             // Create a spreadsheet document by supplying the filepath.
             // By default, AutoSave = true, Editable = true, and Type = xlsx.
             SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.
-                Create(filepath, SpreadsheetDocumentType.Workbook);
+            Create(filepath, SpreadsheetDocumentType.Workbook);
 
             // Add a WorkbookPart to the document.
             WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
@@ -32,14 +32,14 @@ namespace CSV.Models.Utilities
 
             // Add Sheets to the Workbook.
             Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.
-                AppendChild<Sheets>(new Sheets());
+            AppendChild<Sheets>(new Sheets());
 
 
             // Append a new worksheet and associate it with the workbook.
             Sheet sheet = new Sheet()
             {
                 Id = spreadsheetDocument.WorkbookPart.
-                GetIdOfPart(worksheetPart),
+             GetIdOfPart(worksheetPart),
                 SheetId = 1,
                 Name = "Sheet1"
 
@@ -76,7 +76,7 @@ namespace CSV.Models.Utilities
 
 
         private static void AddUpdateCellValue(SpreadsheetDocument spreadSheet, string sheetname,
-    uint rowIndex, string columnName, string text, string value)
+         uint rowIndex, string columnName, string text, string value)
         {
             // Opening document for editing            
             WorksheetPart worksheetPart =
@@ -97,23 +97,23 @@ namespace CSV.Models.Utilities
                 if (value.Equals("num"))
                 {
                     cell.DataType =
-                new EnumValue<CellValues>(CellValues.Number);
+                     new EnumValue<CellValues>(CellValues.Number);
                 }
 
                 if (value.Equals("dat"))
                 {
                     cell.DataType =
-          new EnumValue<CellValues>(CellValues.Date);
+                     new EnumValue<CellValues>(CellValues.Date);
                 }
 
                 if (value.Equals("b"))
                 {
                     cell.DataType =
-                new EnumValue<CellValues>(CellValues.Boolean);
+                     new EnumValue<CellValues>(CellValues.Boolean);
                 }
 
 
-               
+
 
 
                 // Save the worksheet.            
@@ -144,7 +144,12 @@ namespace CSV.Models.Utilities
                 string sheetName = "Sheet" + sheetId;
 
                 // Append the new worksheet and associate it with the workbook.
-                Sheet sheet = new Sheet() { Id = relationshipId, SheetId = sheetId, Name = sheetName };
+                Sheet sheet = new Sheet()
+                {
+                    Id = relationshipId,
+                    SheetId = sheetId,
+                    Name = sheetName
+                };
                 sheets.Append(sheet);
 
 
@@ -168,7 +173,7 @@ namespace CSV.Models.Utilities
             string relationshipId = sheets.First().Id.Value;
             WorksheetPart worksheetPart = (WorksheetPart)
             document.WorkbookPart.GetPartById(relationshipId);
-            Console.WriteLine("hi test:: " + worksheetPart);
+            // Console.WriteLine("hi test:: " + worksheetPart);
             return worksheetPart;
         }
 
@@ -226,7 +231,7 @@ namespace CSV.Models.Utilities
             using (SpreadsheetDocument spreadSheet = SpreadsheetDocument.Open(docName, true))
             {
 
-                AddUpdateCellValue(spreadSheet, "Sheet2", 0, "A", "UniqueId","str");
+                AddUpdateCellValue(spreadSheet, "Sheet2", 0, "A", "UniqueId", "str");
                 AddUpdateCellValue(spreadSheet, "Sheet2", 0, "B", "StudentId", "num");
                 AddUpdateCellValue(spreadSheet, "Sheet2", 0, "C", "FirstName", "str");
                 AddUpdateCellValue(spreadSheet, "Sheet2", 0, "D", "LastName", "str");
@@ -239,10 +244,10 @@ namespace CSV.Models.Utilities
 
         }
 
-            private static void AddDataInExcel(string docName, List<Student> st)
+        private static void AddDataInExcel(string docName, List<Student> st)
         {
 
-           
+
             int value = 0;
             foreach (var data in st)
             {
@@ -253,29 +258,29 @@ namespace CSV.Models.Utilities
                 {
 
 
-                   int a = DateTime.Today.Year - data.DateOfBirthDT.Year;
+                    int a = DateTime.Today.Year - data.DateOfBirthDT.Year;
                     if (a > 100)
                     {
                         a = 24;
                     }
 
                     String isMe = "0";
-                 
-                   
 
-                    if(data.MyRecord == true)
+
+
+                    if (data.MyRecord == true)
                     {
                         isMe = "1";
                     }
 
-                    Console.WriteLine("ISME>>>> " + isMe);
+                    //Console.WriteLine("ISME>>>> " + isMe);
                     AddUpdateCellValue(spreadSheet, "Sheet2", res, "A", (Guid.NewGuid()).ToString(), "str");
                     AddUpdateCellValue(spreadSheet, "Sheet2", res, "B", data.StudentId, "num");
                     AddUpdateCellValue(spreadSheet, "Sheet2", res, "C", data.FirstName, "str");
                     AddUpdateCellValue(spreadSheet, "Sheet2", res, "D", data.LastName, "str");
                     AddUpdateCellValue(spreadSheet, "Sheet2", res, "E", data.DateOfBirth, "dat");
                     AddUpdateCellValue(spreadSheet, "Sheet2", res, "F", isMe, "num");
-                    AddUpdateCellValue(spreadSheet, "Sheet2", res, "G",a.ToString(), "num");
+                    AddUpdateCellValue(spreadSheet, "Sheet2", res, "G", a.ToString(), "num");
 
 
 

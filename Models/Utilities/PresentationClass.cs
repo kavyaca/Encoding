@@ -11,9 +11,7 @@ using D = DocumentFormat.OpenXml.Drawing;
 using System.IO;
 using DocumentFormat.OpenXml.Office2010.Drawing;
 using A = DocumentFormat.OpenXml.Drawing;
-using NonVisualGroupShapeProperties = DocumentFormat.OpenXml.Presentation.NonVisualGroupShapeProperties;
-using NonVisualDrawingProperties = DocumentFormat.OpenXml.Presentation.NonVisualDrawingProperties;
-using NonVisualGroupShapeDrawingProperties = DocumentFormat.OpenXml.Presentation.NonVisualGroupShapeDrawingProperties;
+
 
 namespace CSV.Models.Utilities
 {
@@ -21,10 +19,8 @@ namespace CSV.Models.Utilities
     {
 
 
-        public static void CreatePresentation(string filepath, String image)
+        public static void CreatePresentation(string filepath)
         {
-
-
 
 
             //Create a presentation at a specified file path. The presentation document type is pptx, by default.
@@ -43,7 +39,7 @@ namespace CSV.Models.Utilities
 
 
 
-            }
+        }
 
         public static void InsertImageInSlide(Slide slide, string imagePath, string imageExt)
         {
@@ -162,7 +158,7 @@ namespace CSV.Models.Utilities
                                     new Paragraph(new EndParagraphRunProperties() { Language = "en-US" }))))),
                     new ColorMapOverride(new MasterColorMapping()));
 
-           
+
 
             return slidePart1;
         }
