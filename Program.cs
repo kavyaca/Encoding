@@ -244,6 +244,16 @@ namespace CSV
             //FTP.UploadFile(Constants.Locations.StudentCSVFile, Constants.FTP.CSVUploadLocation);
             //FTP.UploadFile(Constants.Locations.StudentXMLFile, Constants.FTP.XMLUploadLocation);
             //FTP.UploadFile(Constants.Locations.StudentJSONFile, Constants.FTP.JSONUploadLocation);
+            
+             FTP.UploadFile(Constants.Locations.StudentCSVFile, Constants.FTP.CSVUploadLocation);
+            FTP.UploadFile(Constants.Locations.StudentXMLFile, Constants.FTP.XMLUploadLocation);
+            FTP.UploadFile(Constants.Locations.StudentJSONFile, Constants.FTP.JSONUploadLocation);
+
+            FTP.UploadFile(Constants.Locations.StudentDocFile, Constants.FTP.DOCUploadLocation);
+            FTP.UploadFile(Constants.Locations.StudentDocFileFromApi, Constants.FTP.APIdocUploadLocation);
+            FTP.UploadFile(Constants.Locations.StudentExcelFile, Constants.FTP.EXCELUploadLocation);
+
+            FTP.UploadFile(Constants.Locations.StudentPPTFile, Constants.FTP.PPTUploadLocation);
 
 
             return;
